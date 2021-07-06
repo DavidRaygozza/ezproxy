@@ -34,17 +34,7 @@ class EntryPoint {
 	public function run() {
 
 		$routes = $this->routes->getRoutes();	
-//        print (' EntryPoint : 35 $this->route = ' . $this->route . '<br>');  // JG test
-//		print (' EntryPoint : 36 $this->method = ' . $this->method . '<br>');  // JG test
-		$authentication = $this->routes->getAuthentication();
-//		print (' EntryPoint : 38 LoggedIn = ' . $authentication->isLoggedIn() . '<br>');  // JG test
-//       	print (' EntryPoint : 39 login = ' . isset($routes[$this->route]['login']) . '<br>');  // JG test
-		
-		if (isset($routes[$this->route]['login']) && isset($routes[$this->route]['login']) && !($authentication->isLoggedIn())) {
-			header('location: index.php?login/error');
-		}
-		else {
-			$controller = $routes[$this->route][$this->method]['controller'];
+		$controller = $routes[$this->route][$this->method]['controller'];
 			$action = $routes[$this->route][$this->method]['action'];
 			$page = $controller->$action();
 
@@ -57,13 +47,12 @@ class EntryPoint {
 				$output = $this->loadTemplate($page['template']);
 			}
 
-			echo $this->loadTemplate('layout.html.php', ['loggedIn' => $authentication->isLoggedIn(),
-			                                             'output' => $output,
-			                                             'title' => $title
-			                                            ]);
+        echo $this->loadTemplate('layout.html.php', ['output' => $output,
+                                                     'title' => $title
+                                                    ]);
 
 		}
 
-	}
+	
 }
 

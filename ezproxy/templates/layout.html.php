@@ -1,13 +1,8 @@
-<?php
-    //    disables php warnings
-    //error_reporting(E_ERROR | E_PARSE);
-    //header('location: index.php?joke/list');
-?>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="jokes.css"> 
+		<link rel="stylesheet" href="style.css"> 
 		<title><?=$title?></title>
 	</head>
 	<body>

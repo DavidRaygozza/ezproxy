@@ -222,7 +222,6 @@ function runStudentCounter(){
 }
 
 function submitClicked(){
-    document.writeln("Hello);
     document.getElementById('loadingDiv').style.display="block";
     document.getElementByClassName('loader').style.display="block";
 }
@@ -396,7 +395,7 @@ function submitClicked(){
 
 
 <table id="myDiv"style = " margin-top: 2%; margin-bottom: 2%; height: 80%; margin-right: auto; margin-left: auto;">
-<form action = "index.php?joke/list" id = "queryForm" method = "post">
+<form action = "index.php?visit/list" id = "queryForm" method = "post">
 
 <!--password input-->
     <tr>
