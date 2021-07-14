@@ -26,7 +26,7 @@ class Visit {
         }
                 
         if($result1 == "IncorrectPassword"){
-            echo "<p class='mainText'><b>Incorrect Password.</b> Please make new selections above</p>";?><script>alert("polease make new selctions");</script><?php
+            echo "<p class='mainText'><b>Incorrect Password.</b> Please make new selections above</p>";?><script>alert("Incorrect Password. Please make new selections above");</script><?php
         }else if($result1 == "empty"){
             echo "<p class='mainText'><b>Please make selections above & enter Password</b></p>";
         }else if($result1 == "countedStudents" || $result1 == "countedDbs"){

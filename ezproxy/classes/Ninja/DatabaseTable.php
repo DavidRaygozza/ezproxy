@@ -148,16 +148,30 @@ class DatabaseTable {
 //change to main function later
 public function findAll() {
     ?>
+
+
+
 <div>
-<a id="scrollToButton" href="#resultsSection" style="display:none;" onload="loaded()">cick</a>
 <header>
 <svg id="headerSvg"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#FFFFFF" fill-opacity="1" d="M0,128L34.3,133.3C68.6,139,137,149,206,170.7C274.3,192,343,224,411,240C480,256,549,256,617,229.3C685.7,203,754,149,823,138.7C891.4,128,960,160,1029,149.3C1097.1,139,1166,85,1234,69.3C1302.9,53,1371,75,1406,85.3L1440,96L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path></svg>
     <h1>Ezproxy Logs Database</h1>
+    <div class="weather">
+        <p class="temp"></p>
+        <img class="icon"></img>
+    </div>
 </header>
-<script src="jquery-3.5.1.min.js"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="classes/Ninja/script.js"></script>
 <script>
-
+$(document).ready(function(){
+      $.getJSON('classes/Ninja/JSON.json', function(data) {
+              var correctAdminCode = data.adminCode;
+              document.getElementById('correctAdminCode2').value = correctAdminCode;
+                console.log(correctAdminCode);
+      });
+});
+  
 //used to determine which type of dynamic query to run
 function check1(){
     document.getElementById("box1").checked = true;
@@ -401,7 +415,7 @@ function submitClicked(){
     <tr>
         <td></td>
         <td>
-        <input type = "password" id = "adminCode" name = "adminCode" placeholder="PASSWORD">
+        <input type = "password" id = "adminCode" name = "adminCode" value="" placeholder="PASSWORD">
         </td>
     </tr>
 
@@ -496,7 +510,7 @@ function submitClicked(){
     <tr>
         <td></td>
         <td>
-        <input type="submit" value = "Submit" name = "submit" id = "submitButton" onsubmit="submitClicked()" style = "margin-left: 5px; width: 100%;">
+        <input type="submit" value = "Submit" name = "submit" class = "submitButton" id = "submitButton" onsubmit="submitClicked()" style = "margin-left: 5px; width: 100%;">
         </td>
     </tr>
 
@@ -513,6 +527,7 @@ function submitClicked(){
     <tr>
         <td></td>
         <input type="checkbox" id="box3" name="box3" value="box3" onchange="check3()" style="display:none;">
+        <input type="text" name = "correctAdminCode2" id="correctAdminCode2" value="<?php echo $code?>" style="display:none;">
         <td><button onclick="runStudentCounter()" style="text-align:center; width: 12vw;" class = "queryButton">Student Counter</button></td>
 
         </select></td>
@@ -533,17 +548,28 @@ function submitClicked(){
     $level = $_POST['levelSelector'];
    $major = $_POST['majorSelector'];
    $campus = $_POST['campusSelector'];
-                                                                   
     $adminCode = $_POST['adminCode'];
-    $password = "Fall2010";
+    
+    $code = $_POST['correctAdminCode2'];
     $date1 = $_POST['date1'];
     $date2 = $_POST['date2'];
     grabVariables($d1,$m1,$y1, $date1);
     grabVariables($d2,$m2,$y2, $date2);
-                                                                   
 
-    if($adminCode == $password){
-        echo("<br><p id = 'resultsSection'>Password Successful</p><br>");
+
+    if($adminCode == $code && $code != ""){?>
+        <hr>
+        <div id = "results">
+        <?php
+        echo("<br><p id = 'resultsSection'>Password Successful</p><br>");?>
+        <script>
+            function closeDiv(){
+                document.getElementById('alertBox').style.display="none";
+            }
+              var div1 = "<div id='alertBox'><p id='replacableText'>Password Successful</p><a href='#resultsSection'><button class = 'submitButton' id='viewResultsButton' onclick='closeDiv()'>View Results</button></a><button onclick='closeDiv()' style='position: absolute; top:5%;right:5%; background:none; border: 0; color: white;'>X</button></a></div>";
+              $("header").append(div1);
+        </script>
+        <?php
         if(!isValidDate($d1, $d2)){
             return "empty";
         }
@@ -578,7 +604,8 @@ function submitClicked(){
             $q = $this->query($queryString);
             $row = $q->fetch();
             $paramArray[0] = $row[0];
-            echo("There are <b>" . $paramArray[0] . "</b> total visits in this date range<br><br>");
+            echo("Total visits in this date range<br>");
+            echo("<h2 id = 'visitsCounter'>$paramArray[0]</h2>");
             return $paramArray;
             
         } // if first checkbox isnt clicked, selected by default
@@ -725,13 +752,17 @@ function submitClicked(){
             $result2 = "empty";
             return $result2;
         }
-    }else if($adminCode == ""){
+    }else if($adminCode == "" || $code == ""){
         $result2 = "empty";
         return $result2;
     }else{
         $result2 = "IncorrectPassword";
         return $result2;
     } //end of admin code if-elses
+     ?>
+<!--Used to center all text within this area-->
+    </div>
+<?php
 } //end of function
       
     
