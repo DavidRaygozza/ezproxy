@@ -22,3 +22,4 @@ $.getJSON("https://api.openweathermap.org/data/2.5/weather?q=la%20verne&units=im
      responsive(maxWidth);
      maxWidth.addListener(responsive);
 });
+

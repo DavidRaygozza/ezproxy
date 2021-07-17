@@ -147,6 +147,9 @@ class DatabaseTable {
     
 //change to main function later
 public function findAll() {
+    $json = file_get_contents('JSON.json');
+    $json = json_decode($json);
+    $code = $json->adminCode;
     ?>
 
 
@@ -164,13 +167,6 @@ public function findAll() {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="classes/Ninja/script.js"></script>
 <script>
-$(document).ready(function(){
-      $.getJSON('classes/Ninja/JSON.json', function(data) {
-              var correctAdminCode = data.adminCode;
-              document.getElementById('correctAdminCode2').value = correctAdminCode;
-                console.log(correctAdminCode);
-      });
-});
   
 //used to determine which type of dynamic query to run
 function check1(){
@@ -527,7 +523,6 @@ function submitClicked(){
     <tr>
         <td></td>
         <input type="checkbox" id="box3" name="box3" value="box3" onchange="check3()" style="display:none;">
-        <input type="text" name = "correctAdminCode2" id="correctAdminCode2" value="<?php echo $code?>" style="display:none;">
         <td><button onclick="runStudentCounter()" style="text-align:center; width: 12vw;" class = "queryButton">Student Counter</button></td>
 
         </select></td>
@@ -549,15 +544,13 @@ function submitClicked(){
    $major = $_POST['majorSelector'];
    $campus = $_POST['campusSelector'];
     $adminCode = $_POST['adminCode'];
-    
-    $code = $_POST['correctAdminCode2'];
     $date1 = $_POST['date1'];
     $date2 = $_POST['date2'];
     grabVariables($d1,$m1,$y1, $date1);
     grabVariables($d2,$m2,$y2, $date2);
 
 
-    if($adminCode == $code && $code != ""){?>
+    if($adminCode == $code){?>
         <hr>
         <div id = "results">
         <?php
@@ -752,7 +745,7 @@ function submitClicked(){
             $result2 = "empty";
             return $result2;
         }
-    }else if($adminCode == "" || $code == ""){
+    }else if($adminCode == ""){
         $result2 = "empty";
         return $result2;
     }else{
