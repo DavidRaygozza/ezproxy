@@ -1,20 +1,17 @@
 <?php namespace Ninja;?>
 
 <!--
-
 Later:
 Change to inline block display for respinsiveness?
 Add a loading animatin while queries are loading
 Update functionality to run report one-by-one query
 Update documentation
-
 Nows:
 Update variable names across all files (for sure change findAll function)
 comments
 Update documentation
 Create pop up alerts for necessary queries to display counter text & paramteres used (use html & css to make a div that dynamicaalt adds/displa='block')
 create scroll to certian section when query is sent and executed to show there is text at the bottom
-
 -->
 
 <?php
@@ -147,9 +144,6 @@ class DatabaseTable {
     
 //change to main function later
 public function findAll() {
-    $json = file_get_contents('JSON.json');
-    $json = json_decode($json);
-    $code = $json->adminCode;
     ?>
 
 
@@ -167,6 +161,13 @@ public function findAll() {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="classes/Ninja/script.js"></script>
 <script>
+$(document).ready(function(){
+      $.getJSON('classes/Ninja/JSON.json', function(data) {
+              var correctAdminCode = data.adminCode;
+              document.getElementById('correctAdminCode2').value = correctAdminCode;
+                console.log(correctAdminCode);
+      });
+});
   
 //used to determine which type of dynamic query to run
 function check1(){
@@ -523,6 +524,7 @@ function submitClicked(){
     <tr>
         <td></td>
         <input type="checkbox" id="box3" name="box3" value="box3" onchange="check3()" style="display:none;">
+        <input type="text" name = "correctAdminCode2" id="correctAdminCode2" value="<?php echo $code?>" style="display:none;">
         <td><button onclick="runStudentCounter()" style="text-align:center; width: 12vw;" class = "queryButton">Student Counter</button></td>
 
         </select></td>
@@ -544,13 +546,15 @@ function submitClicked(){
    $major = $_POST['majorSelector'];
    $campus = $_POST['campusSelector'];
     $adminCode = $_POST['adminCode'];
+    
+    $code = $_POST['correctAdminCode2'];
     $date1 = $_POST['date1'];
     $date2 = $_POST['date2'];
     grabVariables($d1,$m1,$y1, $date1);
     grabVariables($d2,$m2,$y2, $date2);
 
 
-    if($adminCode == $code){?>
+    if($adminCode == $code && $code != ""){?>
         <hr>
         <div id = "results">
         <?php
@@ -745,7 +749,7 @@ function submitClicked(){
             $result2 = "empty";
             return $result2;
         }
-    }else if($adminCode == ""){
+    }else if($adminCode == "" || $code == ""){
         $result2 = "empty";
         return $result2;
     }else{
@@ -809,80 +813,51 @@ function submitClicked(){
          $row = $query->fetch();
          return $row[0];
      }
-
      public function findById($value) {
          $query = 'SELECT * FROM `' . $this->table . '` WHERE `' . $this->primaryKey . '` = :value';
-
          $parameters = [
              'value' => $value
          ];
-
          $query = $this->query($query, $parameters);
-
          return $query->fetch();
      }
-
      public function find($column, $value) {
          $query = 'SELECT * FROM ' . $this->table . ' WHERE ' . $column . ' = :value';
-
          $parameters = [
              'value' => $value
          ];
-
          $query = $this->query($query, $parameters);
-
          return $query->fetchAll();
      }
-
      private function insert($fields) {
          $query = 'INSERT INTO `' . $this->table . '` (';
-
          foreach ($fields as $key => $value) {
              $query .= '`' . $key . '`,';
          }
-
          $query = rtrim($query, ',');
-
          $query .= ') VALUES (';
-
-
          foreach ($fields as $key => $value) {
              $query .= ':' . $key . ',';
          }
-
          $query = rtrim($query, ',');
-
          $query .= ')';
-
          $fields = $this->processDates($fields);
-
          $this->query($query, $fields);
      }
-
-
      private function update($fields) {
          $query = ' UPDATE `' . $this->table .'` SET ';
-
          foreach ($fields as $key => $value) {
              $query .= '`' . $key . '` = :' . $key . ',';
          }
-
          $query = rtrim($query, ',');
-
          $query .= ' WHERE `' . $this->primaryKey . '` = :primaryKey';
-
          //Set the :primaryKey variable
          $fields['primaryKey'] = $fields['id'];
-
          $fields = $this->processDates($fields);
-
          $this->query($query, $fields);
      }
-
-
      public function delete($id) {
          $parameters = [':id' => $id];
-
          $this->query('DELETE FROM `' . $this->table . '` WHERE `' . $this->primaryKey . '` = :id', $parameters);
      }
      
@@ -1145,11 +1120,9 @@ function submitClicked(){
 
 <!--
 OLD CODE FOR SELECTED DAY/MONTH/YEAR
-
 foreach ($campusArray as $i => $value) {
     unset($campusArray[$i]);
 }
-
         <tr>
         <td>
         <input type="checkbox" id="box1" name="box1" value="box1">
@@ -1166,9 +1139,7 @@ foreach ($campusArray as $i => $value) {
         <?php
             }
         } ?>
-
         </select></td>
-
             <td><p>Month:</p><select id = "selector" onchange="check1()" name = "selector">
         <option name = "All" value = "ALl" selected>All</option>
             <option name = "01" value = "01">January</option>
@@ -1186,7 +1157,6 @@ foreach ($campusArray as $i => $value) {
             </select></td>
             <td><p>Year:</p><select id = "yearSelector" onchange="check1()" name = "yearSelector" style = "margin-left: 5px;">
             <option name = "All" value = "All" selected>All</option>
-
         <?php
             $y = date("Y");
             for($t = $y; $t >= 2020; $t--){?>
@@ -1194,8 +1164,6 @@ foreach ($campusArray as $i => $value) {
         <?php   } ?>
             </select></td>
             
-
-
         <td><p>Database:</p><select id = "dbSelector" name = "dbSelector" onchange="check1()" style = "margin-left: 5px;">
         <option name = "All" value = "All" selected>All</option>
         <?php
@@ -1203,11 +1171,7 @@ foreach ($campusArray as $i => $value) {
         <option><?=htmlspecialchars($t, ENT_QUOTES, 'UTF-8')?></option>
         <?php   } ?>
         </select></td>
-
-
         </tr>
 -->
-
-
 
 
