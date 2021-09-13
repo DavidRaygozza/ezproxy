@@ -19,7 +19,7 @@ How to make edits to web interface code:
 	Host: library-php.laverne.edu
 	Port: 322
 	User: ulvlibrary
-	Password: sran#8Ejb
+	Password: 
 4) The web interface files are housed in a private apache folder so you must go into the folder, and move them to a public folder like /home/ulvlibrary to drag them out of FileZilla
 5) Open up your terminal or command prompt.
 6) Now, we need to connect to the Linux server using SSH. Enter the command 'ssh -p 322 ulvlibrary@10.100.201.26'
@@ -52,7 +52,7 @@ How to make changes to the database if necessary:
 	3) Hostname: '10.100.200.148'
 	4) Port: '3306'
 	5) Username: 'ezproxyuser'
-	6) Password (when prompted): 'Fall2010!' 
+	6) Password (when prompted): '' 
 
 
 What happens if something is broken & the web app is not working?
