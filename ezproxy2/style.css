@@ -1,0 +1,163 @@
+  * {margin: 0; padding: 0;}
+body {font-family: Arial, Helvetica, Sans-serif; background-color: #262833; color: white;}
+header {display: block; background-color: #262833; width: 100vw; text-align: center;}
+h1 {font-weight: normal; color: white; width: 100%; margin: 0 auto;}
+
+/*Orange color used: #F1B434 */
+
+nav {background-color: #9A9E9D;}
+
+nav a {color: white; text-decoration: none;}
+nav a:hover {color: #ddd;}
+nav ul {display: table; width: 100vw;; margin: auto; background-color: white;}
+nav li {display: table-cell; text-align: center; padding: 1em;}submit
+
+main {overflow: auto; background-color: #262833; width: 100vw; margin: auto; }
+
+footer {padding: 1em; background-color: #262833; color: #83786F;}
+
+p {margin-bottom: 1em;}
+
+body {font-size: 1.2em; font-family: arial, helvetica, sans-serif}
+input, label, select, textarea {float: left; width: 15em; margin-bottom: 1em;  padding: 0.5em;}
+label {clear: left; padding: 0; margin: 0;}
+input[type="submit"] {margin-left: 15em; width: auto; padding: 0.5em 1em; clear: both; font-size: 1em;}
+form {overflow: auto; clear: both; display: block;}
+
+blockquote {display: table; margin-bottom: 1em; padding: 0.5em; }
+blockquote p {display: table-cell; width: 90%; vertical-align: top;}
+blockquote form {  display: table-cell; width: 10%;}
+
+.errors {padding: 1em; border: 1px solid red; background-color: lightyellow; color: red; margin-bottom: 1em; overflow: auto;}
+.errors ul {margin-left: 1em;}
+
+input, select, option, button{
+    color: white;
+    text-align: center;
+}
+
+#adminCode, #date1, #date2{
+    background:none;
+    border:0;
+    border-bottom: 1px solid rgb(98, 110, 212);
+    outline:none;
+    box-shadow: none;
+}
+
+#dbSelector2, #majorSelector, #levelSelector, #campusSelector{
+    background: none;
+    border: 0;
+}
+
+select, option{
+    height: 5vh;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.button{
+    background-color: #262833;
+    box-shadow: 0;
+    text-shadow: 0;
+    color: white;
+    border-radius: 40px;
+    padding: 10%;
+    border:1px solid rgb(98, 110, 212);
+    color: rgb(98, 110, 212);
+    min-width: 100px;
+}
+
+.button:hover{
+    background-color: rgb(98, 110, 212);
+    color: white;
+}
+
+.submitButton, #submitButton{
+    font-size: 1.25em;
+    background-color: #262833;
+    margin: 0 2vw;
+    padding: auto 0;
+    text-align: center;
+    width: 12vw;
+    min-width: 150px;
+    min-height: 100px;
+    max-width: 12vw;
+    height: 15vh;
+    max-height: 15vh;
+    box-shadow: 0;
+    text-shadow: 0;
+    color: white;
+    border-radius: 40px;
+    padding: 10%;
+    border:1px solid rgb(98, 110, 212);
+    color: rgb(98, 110, 212);
+}
+
+.submitButton:hover, #submitButton:hover{
+    background-color: rgb(98, 110, 212);
+    color: white;
+}
+
+.queryButton{
+    background: 0;
+    border:0;
+    box-shadow: 0;
+    border-bottom: 1px solid white;
+    font-size: 1em;
+    text-align: center;
+    min-width: 200px;
+}
+
+.queryButton:hover{
+    border-bottom: 1px solid rgb(98, 110, 212);
+    text-align: center;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #83786F;
+  text-align: center;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #83786F;
+  text-align: center;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #83786F;
+  text-align: center;
+}
+
+
+
+#alertBox{
+    position: absolute;
+    top: 0;
+    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+    background-color: #262833;
+    margin: auto;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainText{
+    text-align: center;
+}
+
+#visitsCounter{
+    color: #20b2aa;
+}
+
+#results{
+    text-align:center;
+}
+
+#visitsCounter{
+    font-size: 5em;
+}
